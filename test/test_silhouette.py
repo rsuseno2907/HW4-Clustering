@@ -15,6 +15,7 @@ def test_score_to_sklearn():
     km.fit(clusters)
     pred = km.predict(clusters)
     scores = Silhouette().score(clusters, pred)
+    scores = np.mean(scores)
     sklearn_scores = silhouette_score(clusters, pred)
     assert np.isclose(scores, sklearn_scores, rtol=1e-4)
     # print(scores, sklearn_scores)

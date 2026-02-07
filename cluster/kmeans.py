@@ -76,7 +76,6 @@ class KMeans:
         label_fin = labels
         self.centroids = centroids
         self.labels = label_fin
-        print(centroids)
 
 
     def predict(self, mat: np.ndarray) -> np.ndarray:
@@ -107,7 +106,7 @@ class KMeans:
         self.assignment = list(zip(mat,cens))
         return labels
 
-    def get_error(self, mat) -> float: #TODO ask TA if it's okay to pass in `mat` here
+    def get_error(self, mat) -> float:
         """
         Returns the final squared-mean error of the fit model. You can either do this by storing the
         original dataset or recording it following the end of model fitting.
@@ -117,17 +116,14 @@ class KMeans:
                 the squared-mean error of the fit model
         """
         distances_point_to_centroid = []
-        for pair in self.assignment:
-            distances_point_to_centroid.append(self.dist(pair[0], pair[1]))
-            
+        for point, centroid in self.assignment:
+            dist = np.linalg.norm(point - centroid) ** 2 
+            distances_point_to_centroid.append(dist)
         return np.mean(distances_point_to_centroid)
 
 
 
-    def get_centroids(self) -> np.ndarray: # TODO check with TA if ok with output like this when i print the return
-        # [[ 7.57041575 -2.9889736 ]
-        #  [ 8.90376386  3.92500241]
-        #  [ 6.51760379 -4.3566827 ]
+    def get_centroids(self) -> np.ndarray: 
         """
         Returns the centroid locations of the fit model.
 

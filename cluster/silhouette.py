@@ -55,7 +55,8 @@ class Silhouette:
             s = (b-a)/(max(b,a))
             score.append(s)
             # print(s)
-        return np.mean(score)
+        # return np.mean(score)
+        return score
 
                 
 
